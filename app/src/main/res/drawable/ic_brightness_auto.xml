@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#4CAF50">
+    <!-- 自动亮度 - 自动图标 -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M12,7c-2.76,0 -5,2.24 -5,5s2.24,5 5,5s5,-2.24 5,-5s-2.24,-5 -5,-5zM12,2L6.5,13h11L12,2z" />
+    <text
+        android:x="12"
+        android:y="40"
+        android:text="A"
+        android:textSize="8"
+        android:textColor="#4CAF50"
+        android:textAnchor="middle" />
+</vector>

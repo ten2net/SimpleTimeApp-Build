@@ -1,0 +1,11 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFB84D">
+    <!-- 自定义亮度 - 半太阳图标 -->
+    <path
+        android:fillColor="#FFB84D"
+        android:pathData="M12,7c-2.76,0 -5,2.24 -5,5s2.24,5 5,5s5,-2.24 5,-5s-2.24,-5 -5,-5zM12,17c-2.76,0 -5,-2.24 -5,-5c0,-1.64 0.79,-3.09 2,-4L12,12V5c3.87,0 7,3.13 7,7S15.87,17 12,17z" />
+</vector>
