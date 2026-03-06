@@ -1,7 +1,9 @@
 package com.example.simpletimeapp
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +17,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import android.content.pm.PackageManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,6 +45,11 @@ class MainActivity : AppCompatActivity() {
         Triple(-1, "自动", R.drawable.ic_brightness_auto)
     )
 
+    companion object {
+        private const val REQUEST_WRITE_SETTINGS = 1001
+        private const val REQUEST_SHUTDOWN_PERMISSION = 1002
+    }
+
     private val updateTimeRunnable = object : Runnable {
         override fun run() {
             updateTime()
@@ -64,7 +74,10 @@ class MainActivity : AppCompatActivity() {
         wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager?
         telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
 
-        // 获取当前亮度状态
+        // 检查并申请亮度调节权限
+        checkBrightnessPermission()
+
+        // 检测当前亮度状态
         detectCurrentBrightnessState()
 
         // 启动时间更新
@@ -75,6 +88,25 @@ class MainActivity : AppCompatActivity() {
 
         // 初始化状态显示
         updateStatusIcons()
+    }
+
+    private fun checkBrightnessPermission() {
+        // Android 6.0+ 需要检查 WRITE_SETTINGS 权限
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.System.canWrite(this)) {
+                // 引导用户去设置页面授权
+                AlertDialog.Builder(this)
+                    .setTitle("需要权限")
+                    .setMessage("亮度调节功能需要修改系统设置权限，请在设置中开启。")
+                    .setPositiveButton("去设置") { _, _ ->
+                        val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                        intent.data = Uri.parse("package:$packageName")
+                        startActivityForResult(intent, REQUEST_WRITE_SETTINGS)
+                    }
+                    .setNegativeButton("取消", null)
+                    .show()
+            }
+        }
     }
 
     private fun detectCurrentBrightnessState() {
@@ -127,7 +159,21 @@ class MainActivity : AppCompatActivity() {
 
         // 亮度调节按钮
         brightnessButton.setOnClickListener {
-            toggleBrightness()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.System.canWrite(this)) {
+                // 没有权限，引导用户去设置
+                AlertDialog.Builder(this)
+                    .setTitle("需要权限")
+                    .setMessage("亮度调节功能需要修改系统设置权限。")
+                    .setPositiveButton("去设置") { _, _ ->
+                        val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                        intent.data = Uri.parse("package:$packageName")
+                        startActivityForResult(intent, REQUEST_WRITE_SETTINGS)
+                    }
+                    .setNegativeButton("取消", null)
+                    .show()
+            } else {
+                toggleBrightness()
+            }
         }
     }
 
@@ -151,11 +197,17 @@ class MainActivity : AppCompatActivity() {
                 Settings.System.putInt(contentResolver, 
                     Settings.System.SCREEN_BRIGHTNESS, 
                     brightnessValue)
+                
+                // 同时设置屏幕亮度（立即生效）
+                val layoutParams = window.attributes
+                layoutParams.screenBrightness = brightnessValue / 255.0f
+                window.attributes = layoutParams
+                
                 Toast.makeText(this, "亮度: $brightnessLabel", Toast.LENGTH_SHORT).show()
             }
             updateBrightnessButton()
         } catch (e: Exception) {
-            Toast.makeText(this, "需要权限来调节亮度", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "亮度调节失败: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -179,9 +231,11 @@ class MainActivity : AppCompatActivity() {
         try {
             wifiManager?.let {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                    it.isWifiEnabled = !it.isWifiEnabled
-                    Toast.makeText(this, if (it.isWifiEnabled) "WiFi已开启" else "WiFi已关闭", Toast.LENGTH_SHORT).show()
+                    val newState = !it.isWifiEnabled
+                    it.isWifiEnabled = newState
+                    Toast.makeText(this, if (newState) "WiFi已开启" else "WiFi已关闭", Toast.LENGTH_SHORT).show()
                 } else {
+                    // Android 10+ 跳转设置
                     startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
                 }
             }
@@ -191,15 +245,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toggleMobileData() {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                startActivity(Intent(Settings.ACTION_DATA_USAGE_SETTINGS))
-            } else {
-                startActivity(Intent(Settings.ACTION_DATA_USAGE_SETTINGS))
-            }
-        } catch (e: Exception) {
-            startActivity(Intent(Settings.ACTION_DATA_USAGE_SETTINGS))
-        }
+        startActivity(Intent(Settings.ACTION_DATA_USAGE_SETTINGS))
     }
 
     private fun toggleGPS() {
@@ -208,37 +254,64 @@ class MainActivity : AppCompatActivity() {
 
     private fun showShutdownDialog() {
         AlertDialog.Builder(this)
-            .setTitle("确认关机")
-            .setMessage("确定要关机吗？")
+            .setTitle("⚠️ 确认关机")
+            .setMessage("确定要关闭设备吗？")
             .setPositiveButton("关机") { _, _ ->
                 shutdownDevice()
             }
             .setNegativeButton("取消", null)
+            .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
     }
 
     private fun shutdownDevice() {
         try {
-            val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+            // 方法1: 使用系统关机对话框（需要特殊权限）
             val intent = Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN")
-            intent.putExtra("android.intent.extra.KEY_CONFIRM", true)
+            intent.putExtra("android.intent.extra.KEY_CONFIRM", false)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            
             try {
-                startActivity(intent)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    // Android 8.0+ 使用新的关机方式
+                    val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
+                    pm.javaClass.getMethod("shutdown", Boolean::class.java, String::class.java, Boolean::class.java)
+                        .invoke(pm, false, "user_requested", false)
+                } else {
+                    startActivity(intent)
+                }
             } catch (e: Exception) {
+                // 方法2: 尝试使用PowerManager重启（关机参数）
                 try {
-                    val method = powerManager.javaClass.getMethod("reboot", String::class.java)
-                    method.invoke(powerManager, null)
+                    val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
+                    pm.javaClass.getMethod("reboot", String::class.java).invoke(pm, "shutdown")
                 } catch (e2: Exception) {
+                    // 方法3: 跳转到系统关机界面
+                    val shutdownIntent = Intent(Intent.ACTION_SHUTDOWN)
+                    shutdownIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     try {
-                        Runtime.getRuntime().exec("su -c reboot -p")
+                        sendBroadcast(shutdownIntent)
                     } catch (e3: Exception) {
-                        Toast.makeText(this, "关机功能需要系统权限", Toast.LENGTH_LONG).show()
+                        // 方法4: 使用Root权限（如果设备已Root）
+                        try {
+                            Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot -p"))
+                        } catch (e4: Exception) {
+                            // 方法5: 跳转系统电源菜单
+                            val powerMenuIntent = Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
+                            sendBroadcast(powerMenuIntent)
+                            
+                            // 模拟长按电源键
+                            try {
+                                Runtime.getRuntime().exec("input keyevent 26") // KEYCODE_POWER
+                            } catch (e5: Exception) {
+                                Toast.makeText(this, "关机需要系统权限\n请长按电源键手动关机", Toast.LENGTH_LONG).show()
+                            }
+                        }
                     }
                 }
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "关机失败", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "关机失败: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -284,10 +357,29 @@ class MainActivity : AppCompatActivity() {
         handler.post(updateTimeRunnable)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_WRITE_SETTINGS) {
+            // 用户从设置页面返回，重新检测亮度状态
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.System.canWrite(this)) {
+                    Toast.makeText(this, "权限已获取，可以调节亮度了", Toast.LENGTH_SHORT).show()
+                    detectCurrentBrightnessState()
+                    updateBrightnessButton()
+                } else {
+                    Toast.makeText(this, "未获取权限，亮度调节功能受限", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         startDynamicTimeUpdate()
         updateStatusIcons()
+        // 重新检测亮度状态（可能用户在设置中修改了）
+        detectCurrentBrightnessState()
+        updateBrightnessButton()
     }
 
     override fun onPause() {
