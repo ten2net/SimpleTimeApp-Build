@@ -74,11 +74,14 @@ class MainActivity : AppCompatActivity() {
         wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager?
         telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
 
+        // 检测当前亮度状态（必须在检查权限前执行，以显示当前状态）
+        detectCurrentBrightnessState()
+        
+        // 立即更新亮度按钮显示
+        updateBrightnessButton()
+
         // 检查并申请亮度调节权限
         checkBrightnessPermission()
-
-        // 检测当前亮度状态
-        detectCurrentBrightnessState()
 
         // 启动时间更新
         startDynamicTimeUpdate()
@@ -265,53 +268,72 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun shutdownDevice() {
-        try {
-            // 方法1: 使用系统关机对话框（需要特殊权限）
-            val intent = Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN")
-            intent.putExtra("android.intent.extra.KEY_CONFIRM", false)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            
-            try {
+        // 尝试多种关机方法
+        val methods = listOf(
+            // 方法1: Android 8.0+ PowerManager.shutdown()
+            {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    // Android 8.0+ 使用新的关机方式
                     val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
                     pm.javaClass.getMethod("shutdown", Boolean::class.java, String::class.java, Boolean::class.java)
                         .invoke(pm, false, "user_requested", false)
-                } else {
-                    startActivity(intent)
+                    true
+                } else false
+            },
+            // 方法2: 使用系统关机对话框（需要系统签名或Root）
+            {
+                val intent = Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN")
+                intent.putExtra("android.intent.extra.KEY_CONFIRM", false)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                true
+            },
+            // 方法3: 使用PowerManager重启（模拟关机）
+            {
+                val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
+                pm.javaClass.getMethod("reboot", String::class.java).invoke(pm, "shutdown")
+                true
+            },
+            // 方法4: 发送关机广播
+            {
+                val shutdownIntent = Intent(Intent.ACTION_SHUTDOWN)
+                shutdownIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                sendBroadcast(shutdownIntent)
+                true
+            },
+            // 方法5: 使用Root权限（如果设备已Root）
+            {
+                Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot -p"))
+                true
+            }
+        )
+
+        var success = false
+        for ((index, method) in methods.withIndex()) {
+            try {
+                if (method()) {
+                    success = true
+                    break
                 }
             } catch (e: Exception) {
-                // 方法2: 尝试使用PowerManager重启（关机参数）
-                try {
-                    val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
-                    pm.javaClass.getMethod("reboot", String::class.java).invoke(pm, "shutdown")
-                } catch (e2: Exception) {
-                    // 方法3: 跳转到系统关机界面
-                    val shutdownIntent = Intent(Intent.ACTION_SHUTDOWN)
-                    shutdownIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                // 继续尝试下一个方法
+            }
+        }
+
+        if (!success) {
+            // 所有方法都失败，提供手动关机指导
+            AlertDialog.Builder(this)
+                .setTitle("⚠️ 需要系统权限")
+                .setMessage("自动关机需要系统级权限。\n\n请尝试以下方法之一：\n1. 确保设备已Root后重试\n2. 长按电源键手动关机\n3. 将此应用安装为系统应用")
+                .setPositiveButton("打开电源菜单") { _, _ ->
                     try {
-                        sendBroadcast(shutdownIntent)
-                    } catch (e3: Exception) {
-                        // 方法4: 使用Root权限（如果设备已Root）
-                        try {
-                            Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot -p"))
-                        } catch (e4: Exception) {
-                            // 方法5: 跳转系统电源菜单
-                            val powerMenuIntent = Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
-                            sendBroadcast(powerMenuIntent)
-                            
-                            // 模拟长按电源键
-                            try {
-                                Runtime.getRuntime().exec("input keyevent 26") // KEYCODE_POWER
-                            } catch (e5: Exception) {
-                                Toast.makeText(this, "关机需要系统权限\n请长按电源键手动关机", Toast.LENGTH_LONG).show()
-                            }
-                        }
+                        // 尝试打开电源菜单
+                        Runtime.getRuntime().exec("input keyevent 26") // KEYCODE_POWER
+                    } catch (e: Exception) {
+                        Toast.makeText(this, "无法打开电源菜单，请手动长按电源键", Toast.LENGTH_LONG).show()
                     }
                 }
-            }
-        } catch (e: Exception) {
-            Toast.makeText(this, "关机失败: ${e.message}", Toast.LENGTH_SHORT).show()
+                .setNegativeButton("取消", null)
+                .show()
         }
     }
 

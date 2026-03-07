@@ -11,14 +11,24 @@ android {
         applicationId "com.example.simpletimeapp"
         minSdk 24
         targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        versionCode 6
+        versionName "6.0"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../keystore.jks')
+            storePassword 'simpletime'
+            keyAlias 'simpletime'
+            keyPassword 'simpletime'
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     

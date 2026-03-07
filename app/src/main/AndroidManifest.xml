@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.simpletimeapp"
-    android:versionCode="5"
-    android:versionName="5.0">
+    android:versionCode="6"
+    android:versionName="6.0">
 
     <!-- WiFi权限 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -21,7 +21,7 @@
 
     <!-- 关机权限 -->
     <uses-permission android:name="android.permission.DEVICE_POWER" />
-    <uses-permission android:name="android.permission.REBOOT" /
+    <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.SHUTDOWN" />
 
     <!-- Root权限（尝试使用） -->
