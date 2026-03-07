@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     private val brightnessStates = listOf(
         Triple(255, "全亮", R.drawable.ic_brightness_high),
         Triple(128, "自定义", R.drawable.ic_brightness_medium),
-        Triple(20, "全暗", R.drawable.ic_brightness_low),
+        Triple(5, "全暗", R.drawable.ic_brightness_low),  // 改为5而不是20，实现真正的全暗
         Triple(-1, "自动", R.drawable.ic_brightness_auto)
     )
 
@@ -127,20 +127,29 @@ class MainActivity : AppCompatActivity() {
             val isAutoMode = (autoBrightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
 
             // 获取当前亮度值 (0-255)
+            // 注意：这个值是系统亮度值，不是当前窗口亮度
             val currentBrightness = Settings.System.getInt(
                 contentResolver,
                 Settings.System.SCREEN_BRIGHTNESS,
                 128
             )
 
-            Log.d("Brightness", "检测到亮度值: $currentBrightness, 自动模式: $isAutoMode")
+            // 获取当前窗口亮度（如果有设置过）
+            val windowBrightness = window.attributes.screenBrightness
+            val effectiveBrightness = if (windowBrightness > 0) {
+                (windowBrightness * 255).toInt()
+            } else {
+                currentBrightness
+            }
+
+            Log.d("Brightness", "系统亮度: $currentBrightness, 窗口亮度: $windowBrightness, 有效亮度: $effectiveBrightness, 自动模式: $isAutoMode")
 
             // 根据状态设置 brightnessState
             brightnessState = when {
                 isAutoMode -> 3 // 自动模式
-                currentBrightness >= 180 -> 0 // 全亮 (180-255)
-                currentBrightness >= 60 -> 1  // 自定义 (60-179)
-                else -> 2 // 全暗 (0-59)
+                effectiveBrightness >= 180 -> 0 // 全亮 (180-255)
+                effectiveBrightness >= 30 -> 1  // 自定义 (30-179)
+                else -> 2 // 全暗 (0-29)
             }
 
             Log.d("Brightness", "设置亮度状态索引: $brightnessState, 状态: ${brightnessStates[brightnessState].second}")
@@ -268,7 +277,58 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toggleGPS() {
-        startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+        try {
+            // 获取当前GPS状态
+            val locationMode = Settings.Secure.getInt(contentResolver, Settings.Secure.LOCATION_MODE)
+            val isGpsEnabled = locationMode != Settings.Secure.LOCATION_MODE_OFF
+            
+            // 尝试直接切换GPS状态（需要WRITE_SECURE_SETTINGS权限）
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                // Android 4.4及以下可以尝试直接修改
+                val newMode = if (isGpsEnabled) {
+                    Settings.Secure.LOCATION_MODE_OFF
+                } else {
+                    Settings.Secure.LOCATION_MODE_HIGH_ACCURACY
+                }
+                
+                try {
+                    Settings.Secure.putInt(contentResolver, Settings.Secure.LOCATION_MODE, newMode)
+                    Toast.makeText(this, if (isGpsEnabled) "GPS已关闭" else "GPS已开启", Toast.LENGTH_SHORT).show()
+                    updateStatusIcons()
+                    return
+                } catch (e: SecurityException) {
+                    // 没有权限，跳转到设置
+                    startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                }
+            } else {
+                // Android 5.0+ 尝试切换
+                val newMode = if (isGpsEnabled) {
+                    Settings.Secure.LOCATION_MODE_OFF
+                } else {
+                    Settings.Secure.LOCATION_MODE_HIGH_ACCURACY
+                }
+                
+                try {
+                    // 使用反射尝试修改（某些设备可能允许）
+                    Settings.Secure.putInt(contentResolver, Settings.Secure.LOCATION_MODE, newMode)
+                    Toast.makeText(this, if (isGpsEnabled) "GPS已关闭" else "GPS已开启", Toast.LENGTH_SHORT).show()
+                    updateStatusIcons()
+                } catch (e: SecurityException) {
+                    // 没有权限，显示提示并跳转到设置
+                    AlertDialog.Builder(this)
+                        .setTitle("需要权限")
+                        .setMessage("直接控制GPS需要特殊权限。是否跳转到设置手动开启/关闭？")
+                        .setPositiveButton("去设置") { _, _ ->
+                            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                        }
+                        .setNegativeButton("取消", null)
+                        .show()
+                }
+            }
+        } catch (e: Exception) {
+            // 出错时跳转到设置
+            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+        }
     }
 
     private fun showShutdownDialog() {
