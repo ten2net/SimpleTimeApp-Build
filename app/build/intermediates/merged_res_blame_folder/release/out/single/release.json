@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_ic_gps.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/ic_gps.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_ic_data.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/ic_data.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_bg_brightness_button.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/bg_brightness_button.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_ic_brightness_high.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/ic_brightness_high.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_bg_function_button.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/bg_function_button.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_ic_brightness_medium.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/ic_brightness_medium.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_ic_brightness_auto.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/ic_brightness_auto.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/layout_activity_main.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_ic_power.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/ic_power.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_ic_brightness_low.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/ic_brightness_low.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/xml_accessibility_service_config.xml.flat",
+        "source": "com.example.simpletimeapp-main-29:/xml/accessibility_service_config.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_ic_wifi.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/ic_wifi.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_bg_time_card.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/bg_time_card.xml"
+    },
+    {
+        "merged": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-merged_res-28:/drawable_bg_shutdown_button.xml.flat",
+        "source": "/root/.gradle/daemon/8.2/com.example.simpletimeapp-main-29:/drawable/bg_shutdown_button.xml"
+    }
+]

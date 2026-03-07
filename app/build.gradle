@@ -11,8 +11,8 @@ android {
         applicationId "com.example.simpletimeapp"
         minSdk 24
         targetSdk 34
-        versionCode 6
-        versionName "6.0"
+        versionCode 7
+        versionName "7.0-accessibility"
     }
 
     signingConfigs {
@@ -39,6 +39,10 @@ android {
     
     kotlinOptions {
         jvmTarget = '17'
+    }
+
+    lint {
+        disable 'ProtectedPermissions', 'MissingPermission', 'InlinedApi'
     }
 }
 

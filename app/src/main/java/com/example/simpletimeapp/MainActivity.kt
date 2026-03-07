@@ -268,73 +268,79 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun shutdownDevice() {
-        // 尝试多种关机方法
-        val methods = listOf(
-            // 方法1: Android 8.0+ PowerManager.shutdown()
-            {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
-                    pm.javaClass.getMethod("shutdown", Boolean::class.java, String::class.java, Boolean::class.java)
-                        .invoke(pm, false, "user_requested", false)
-                    true
-                } else false
-            },
-            // 方法2: 使用系统关机对话框（需要系统签名或Root）
-            {
-                val intent = Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN")
-                intent.putExtra("android.intent.extra.KEY_CONFIRM", false)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                true
-            },
-            // 方法3: 使用PowerManager重启（模拟关机）
-            {
+        // 方法1: 尝试直接关机（需要系统权限）
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
-                pm.javaClass.getMethod("reboot", String::class.java).invoke(pm, "shutdown")
-                true
-            },
-            // 方法4: 发送关机广播
-            {
-                val shutdownIntent = Intent(Intent.ACTION_SHUTDOWN)
-                shutdownIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                sendBroadcast(shutdownIntent)
-                true
-            },
-            // 方法5: 使用Root权限（如果设备已Root）
-            {
-                Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot -p"))
-                true
+                pm.javaClass.getMethod("shutdown", Boolean::class.java, String::class.java, Boolean::class.java)
+                    .invoke(pm, false, "user_requested", false)
+                return
             }
-        )
+        } catch (e: Exception) {
+            // 继续尝试其他方法
+        }
 
-        var success = false
-        for ((index, method) in methods.withIndex()) {
+        // 方法2: 使用无障碍服务自动点击关机
+        if (ShutdownAccessibilityService.isServiceEnabled()) {
+            // 无障碍服务已启用，通知服务准备自动点击关机
+            ShutdownAccessibilityService.isShutdownPending = true
+            // 尝试模拟电源键（需要Root）
             try {
-                if (method()) {
-                    success = true
-                    break
-                }
+                Runtime.getRuntime().exec("input keyevent 26")
+                return
             } catch (e: Exception) {
-                // 继续尝试下一个方法
+                // 失败了，显示引导
             }
         }
 
-        if (!success) {
-            // 所有方法都失败，提供手动关机指导
+        // 方法3: 引导用户开启无障碍服务或手动关机
+        showAccessibilityGuide()
+    }
+
+    private fun showAccessibilityGuide() {
+        val isServiceEnabled = ShutdownAccessibilityService.isServiceEnabled()
+
+        if (!isServiceEnabled) {
             AlertDialog.Builder(this)
-                .setTitle("⚠️ 需要系统权限")
-                .setMessage("自动关机需要系统级权限。\n\n请尝试以下方法之一：\n1. 确保设备已Root后重试\n2. 长按电源键手动关机\n3. 将此应用安装为系统应用")
-                .setPositiveButton("打开电源菜单") { _, _ ->
-                    try {
-                        // 尝试打开电源菜单
-                        Runtime.getRuntime().exec("input keyevent 26") // KEYCODE_POWER
-                    } catch (e: Exception) {
-                        Toast.makeText(this, "无法打开电源菜单，请手动长按电源键", Toast.LENGTH_LONG).show()
-                    }
+                .setTitle("🔧 开启一键关机")
+                .setMessage("一键关机需要开启无障碍服务辅助操作。\n\n开启后，应用将自动完成：\n1. 打开电源菜单\n2. 点击关机按钮\n3. 确认关机操作")
+                .setPositiveButton("去开启") { _, _ ->
+                    openAccessibilitySettings()
                 }
-                .setNegativeButton("取消", null)
+                .setNegativeButton("手动关机") { _, _ ->
+                    showManualShutdownGuide()
+                }
+                .setNeutralButton("取消", null)
                 .show()
+        } else {
+            showManualShutdownGuide()
         }
+    }
+
+    private fun openAccessibilitySettings() {
+        try {
+            val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+            startActivity(intent)
+            Toast.makeText(this, "请找到【一键关机服务】并开启", Toast.LENGTH_LONG).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "无法打开设置，请手动进入：设置 > 辅助功能 > 无障碍", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun showManualShutdownGuide() {
+        AlertDialog.Builder(this)
+            .setTitle("📱 手动关机")
+            .setMessage("请按住电源键 2-3 秒，然后点击\"关机\"按钮。")
+            .setPositiveButton("模拟电源键") { _, _ ->
+                try {
+                    // 尝试模拟电源键（需要Root）
+                    Runtime.getRuntime().exec("input keyevent 26")
+                } catch (e: Exception) {
+                    Toast.makeText(this, "模拟失败，请手动长按电源键", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("我知道了", null)
+            .show()
     }
 
     private fun updateStatusIcons() {

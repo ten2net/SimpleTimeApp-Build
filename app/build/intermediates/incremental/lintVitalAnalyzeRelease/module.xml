@@ -1,0 +1,32 @@
+<lint-module
+    format="1"
+    dir="/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app"
+    name=":app"
+    type="APP"
+    maven="SimpleTimeApp:app:"
+    agpVersion="8.1.0"
+    buildFolder="build"
+    bootClassPath="/opt/android-sdk/platforms/android-34/android.jar:/opt/android-sdk/build-tools/33.0.1/core-lambda-stubs.jar"
+    javaSourceLevel="17"
+    compileTarget="android-34"
+    neverShrinking="true">
+  <lintOptions
+      disable="ProtectedPermissions,MissingPermission,InlinedApi"
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true">
+    <severities>
+      <severity
+        id="InlinedApi"
+        severity="IGNORE" />
+      <severity
+        id="MissingPermission"
+        severity="IGNORE" />
+      <severity
+        id="ProtectedPermissions"
+        severity="IGNORE" />
+    </severities>
+  </lintOptions>
+  <variant name="release"/>
+</lint-module>

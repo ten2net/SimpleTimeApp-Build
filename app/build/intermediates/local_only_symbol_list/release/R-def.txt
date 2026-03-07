@@ -1,0 +1,27 @@
+R_DEF: Internal format may change without notice
+local
+drawable bg_brightness_button
+drawable bg_function_button
+drawable bg_shutdown_button
+drawable bg_time_card
+drawable ic_brightness_auto
+drawable ic_brightness_high
+drawable ic_brightness_low
+drawable ic_brightness_medium
+drawable ic_data
+drawable ic_gps
+drawable ic_power
+drawable ic_wifi
+id brightnessButton
+id dataButton
+id gpsButton
+id shutdownButton
+id timeTextView
+id wifiButton
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+string accessibility_service_description
+string accessibility_service_label
+string app_name
+xml accessibility_service_config

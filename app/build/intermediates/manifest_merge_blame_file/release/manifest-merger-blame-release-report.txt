@@ -1,0 +1,153 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.simpletimeapp"
+4    android:versionCode="7"
+5    android:versionName="7.0-accessibility" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- WiFi权限 -->
+12    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+12-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:8:5-76
+12-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:8:22-73
+13    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+13-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:9:5-76
+13-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:9:22-73
+14
+15    <!-- 网络权限 -->
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:12:5-79
+16-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:12:22-76
+17
+18    <!-- GPS权限 -->
+19    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+19-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:15:5-79
+19-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:15:22-76
+20    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+20-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:16:5-81
+20-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:16:22-78
+21
+22    <!-- 亮度调节 -->
+23    <uses-permission
+23-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:19:5-20:38
+24        android:name="android.permission.WRITE_SETTINGS"
+24-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:19:22-70
+25        android:maxSdkVersion="28" />
+25-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:20:9-35
+26
+27    <!-- 关机权限 -->
+28    <uses-permission android:name="android.permission.DEVICE_POWER" />
+28-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:23:5-71
+28-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:23:22-68
+29    <uses-permission android:name="android.permission.REBOOT" />
+29-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:24:5-65
+29-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:24:22-62
+30    <uses-permission android:name="android.permission.SHUTDOWN" />
+30-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:25:5-67
+30-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:25:22-64
+31
+32    <!-- Root权限（尝试使用） -->
+33    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+33-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:28:5-75
+33-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:28:22-72
+34
+35    <permission
+35-->[androidx.core:core:1.9.0] /root/.gradle/caches/transforms-3/c50bf290710803fc246128fd8fb2f6cd/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+36        android:name="com.example.simpletimeapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+36-->[androidx.core:core:1.9.0] /root/.gradle/caches/transforms-3/c50bf290710803fc246128fd8fb2f6cd/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+37        android:protectionLevel="signature" />
+37-->[androidx.core:core:1.9.0] /root/.gradle/caches/transforms-3/c50bf290710803fc246128fd8fb2f6cd/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+38
+39    <uses-permission android:name="com.example.simpletimeapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+39-->[androidx.core:core:1.9.0] /root/.gradle/caches/transforms-3/c50bf290710803fc246128fd8fb2f6cd/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+39-->[androidx.core:core:1.9.0] /root/.gradle/caches/transforms-3/c50bf290710803fc246128fd8fb2f6cd/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+40
+41    <application
+41-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:30:5-61:19
+42        android:allowBackup="true"
+42-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:31:9-35
+43        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+43-->[androidx.core:core:1.9.0] /root/.gradle/caches/transforms-3/c50bf290710803fc246128fd8fb2f6cd/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+44        android:extractNativeLibs="false"
+45        android:icon="@mipmap/ic_launcher"
+45-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:32:9-43
+46        android:label="@string/app_name"
+46-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:34:9-41
+47        android:requestLegacyExternalStorage="true"
+47-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:37:9-52
+48        android:roundIcon="@mipmap/ic_launcher_round"
+48-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:33:9-54
+49        android:supportsRtl="true"
+49-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:35:9-35
+50        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+50-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:36:9-67
+51        <activity
+51-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:39:9-47:20
+52            android:name="com.example.simpletimeapp.MainActivity"
+52-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:40:13-41
+53            android:exported="true"
+53-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:41:13-36
+54            android:screenOrientation="portrait" >
+54-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:42:13-49
+55            <intent-filter>
+55-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:43:13-46:29
+56                <action android:name="android.intent.action.MAIN" />
+56-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:44:17-69
+56-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:44:25-66
+57
+58                <category android:name="android.intent.category.LAUNCHER" />
+58-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:45:17-77
+58-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:45:27-74
+59            </intent-filter>
+60        </activity>
+61
+62        <!-- 无障碍服务 -->
+63        <service
+63-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:50:9-60:19
+64            android:name="com.example.simpletimeapp.ShutdownAccessibilityService"
+64-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:51:13-57
+65            android:exported="true"
+65-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:53:13-36
+66            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+66-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:52:13-79
+67            <intent-filter>
+67-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:54:13-56:29
+68                <action android:name="android.accessibilityservice.AccessibilityService" />
+68-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:55:17-92
+68-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:55:25-89
+69            </intent-filter>
+70
+71            <meta-data
+71-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:57:13-59:72
+72                android:name="android.accessibilityservice"
+72-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:58:17-60
+73                android:resource="@xml/accessibility_service_config" />
+73-->/root/.openclaw/workspace-mistw/android-projects/SimpleTimeApp/app/src/main/AndroidManifest.xml:59:17-69
+74        </service>
+75
+76        <provider
+76-->[androidx.emoji2:emoji2:1.2.0] /root/.gradle/caches/transforms-3/8b07d8a139ca4e1ca02018bc6fa6e8d7/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+77            android:name="androidx.startup.InitializationProvider"
+77-->[androidx.emoji2:emoji2:1.2.0] /root/.gradle/caches/transforms-3/8b07d8a139ca4e1ca02018bc6fa6e8d7/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+78            android:authorities="com.example.simpletimeapp.androidx-startup"
+78-->[androidx.emoji2:emoji2:1.2.0] /root/.gradle/caches/transforms-3/8b07d8a139ca4e1ca02018bc6fa6e8d7/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+79            android:exported="false" >
+79-->[androidx.emoji2:emoji2:1.2.0] /root/.gradle/caches/transforms-3/8b07d8a139ca4e1ca02018bc6fa6e8d7/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+80            <meta-data
+80-->[androidx.emoji2:emoji2:1.2.0] /root/.gradle/caches/transforms-3/8b07d8a139ca4e1ca02018bc6fa6e8d7/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+81                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+81-->[androidx.emoji2:emoji2:1.2.0] /root/.gradle/caches/transforms-3/8b07d8a139ca4e1ca02018bc6fa6e8d7/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+82                android:value="androidx.startup" />
+82-->[androidx.emoji2:emoji2:1.2.0] /root/.gradle/caches/transforms-3/8b07d8a139ca4e1ca02018bc6fa6e8d7/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+83            <meta-data
+83-->[androidx.lifecycle:lifecycle-process:2.4.1] /root/.gradle/caches/transforms-3/c51b42a7077059c876d4d8035715e482/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+84                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+84-->[androidx.lifecycle:lifecycle-process:2.4.1] /root/.gradle/caches/transforms-3/c51b42a7077059c876d4d8035715e482/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+85                android:value="androidx.startup" />
+85-->[androidx.lifecycle:lifecycle-process:2.4.1] /root/.gradle/caches/transforms-3/c51b42a7077059c876d4d8035715e482/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+86        </provider>
+87    </application>
+88
+89</manifest>

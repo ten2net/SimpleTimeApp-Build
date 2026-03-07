@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">系统控制面板</string>
+    <string name="accessibility_service_description">一键关机辅助服务：帮助您快速关闭设备，无需手动操作电源菜单。</string>
+    <string name="accessibility_service_label">一键关机服务</string>
 </resources>

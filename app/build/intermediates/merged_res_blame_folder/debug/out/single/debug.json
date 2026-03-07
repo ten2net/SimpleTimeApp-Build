@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_ic_wifi.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/ic_wifi.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_bg_time_card.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/bg_time_card.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_ic_power.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/ic_power.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_ic_brightness_medium.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/ic_brightness_medium.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_ic_brightness_high.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/ic_brightness_high.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_bg_shutdown_button.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/bg_shutdown_button.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_bg_brightness_button.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/bg_brightness_button.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_ic_brightness_low.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/ic_brightness_low.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_ic_data.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/ic_data.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/xml_accessibility_service_config.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/xml/accessibility_service_config.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.simpletimeapp-main-30:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_ic_gps.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/ic_gps.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/layout_activity_main.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_ic_brightness_auto.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/ic_brightness_auto.xml"
+    },
+    {
+        "merged": "com.example.simpletimeapp-merged_res-28:/drawable_bg_function_button.xml.flat",
+        "source": "com.example.simpletimeapp-main-30:/drawable/bg_function_button.xml"
+    }
+]

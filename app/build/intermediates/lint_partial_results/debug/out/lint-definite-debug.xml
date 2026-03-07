@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.1.0" type="incidents">
+
+    <incident
+        id="VectorPath"
+        severity="warning"
+        message="Very long vector path (976 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector.">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/drawable/ic_brightness_high.xml"
+            line="10"
+            column="27"
+            startOffset="304"
+            endLine="10"
+            endColumn="1003"
+            endOffset="1280"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;2024-01-01 00:00:00&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="14"
+            column="9"
+            startOffset="458"
+            endLine="14"
+            endColumn="43"
+            endOffset="492"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;WiFi\n已关闭&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="41"
+            column="13"
+            startOffset="1361"
+            endLine="41"
+            endColumn="37"
+            endOffset="1385"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;移动数据\n已关闭&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="58"
+            column="13"
+            startOffset="1992"
+            endLine="58"
+            endColumn="37"
+            endOffset="2016"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;GPS\n已关闭&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="75"
+            column="13"
+            startOffset="2621"
+            endLine="75"
+            endColumn="36"
+            endOffset="2644"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;亮度\n自定义&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="92"
+            column="13"
+            startOffset="3256"
+            endLine="92"
+            endColumn="35"
+            endOffset="3278"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;一键关机&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="109"
+            column="9"
+            startOffset="3821"
+            endLine="109"
+            endColumn="28"
+            endOffset="3840"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 24">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/simpletimeapp/MainActivity.kt"
+            line="98"
+            column="13"
+            startOffset="3104"
+            endLine="98"
+            endColumn="59"
+            endOffset="3150"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 24">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/simpletimeapp/MainActivity.kt"
+            line="165"
+            column="17"
+            startOffset="5237"
+            endLine="165"
+            endColumn="63"
+            endOffset="5283"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/simpletimeapp/MainActivity.kt"
+            line="219"
+            column="33"
+            startOffset="7581"
+            endLine="219"
+            endColumn="45"
+            endOffset="7593"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/simpletimeapp/MainActivity.kt"
+            line="361"
+            column="31"
+            startOffset="12631"
+            endLine="361"
+            endColumn="41"
+            endOffset="12641"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/simpletimeapp/MainActivity.kt"
+            line="370"
+            column="30"
+            startOffset="13003"
+            endLine="370"
+            endColumn="39"
+            endOffset="13012"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/simpletimeapp/MainActivity.kt"
+            line="370"
+            column="31"
+            startOffset="13004"
+            endLine="370"
+            endColumn="34"
+            endOffset="13007"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 24">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/simpletimeapp/MainActivity.kt"
+            line="392"
+            column="17"
+            startOffset="13678"
+            endLine="392"
+            endColumn="63"
+            endOffset="13724"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.1">
+        <fix-replace
+            description="Change to 1.7.1"
+            family="Update versions"
+            oldString="1.6.1"
+            replacement="1.7.1"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="50"
+            column="20"
+            startOffset="1100"
+            endLine="50"
+            endColumn="56"
+            endOffset="1136"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.android.material:material than 1.9.0 is available: 1.13.0">
+        <fix-replace
+            description="Change to 1.13.0"
+            family="Update versions"
+            oldString="1.9.0"
+            replacement="1.13.0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="51"
+            column="20"
+            startOffset="1156"
+            endLine="51"
+            endColumn="64"
+            endOffset="1200"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.1">
+        <fix-replace
+            description="Change to 2.2.1"
+            family="Update versions"
+            oldString="2.1.4"
+            replacement="2.2.1"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="52"
+            column="20"
+            startOffset="1220"
+            endLine="52"
+            endColumn="70"
+            endOffset="1270"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `#F5F5F5` with a theme that also paints a background (inferred theme is `@style/Theme.AppCompat.Light.DarkActionBar`)">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="6"
+            column="5"
+            startOffset="232"
+            endLine="6"
+            endColumn="33"
+            endOffset="260"/>
+    </incident>
+
+    <incident
+        id="IconLauncherShape"
+        severity="warning"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-hdpi/ic_launcher_round.png"/>
+    </incident>
+
+    <incident
+        id="IconLauncherShape"
+        severity="warning"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-mdpi/ic_launcher_round.png"/>
+    </incident>
+
+    <incident
+        id="IconLauncherShape"
+        severity="warning"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-xhdpi/ic_launcher_round.png"/>
+    </incident>
+
+    <incident
+        id="IconLauncherShape"
+        severity="warning"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-xxhdpi/ic_launcher_round.png"/>
+    </incident>
+
+    <incident
+        id="IconLauncherShape"
+        severity="warning"
+        message="Launcher icon used as round icon did not have a circular shape">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-xxxhdpi/ic_launcher_round.png"/>
+    </incident>
+
+    <incident
+        id="IconDuplicates"
+        severity="warning"
+        message="The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-xxhdpi/ic_launcher_round.png"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-xxhdpi/ic_launcher.png"/>
+    </incident>
+
+    <incident
+        id="IconDuplicates"
+        severity="warning"
+        message="The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-xxxhdpi/ic_launcher_round.png"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-xxxhdpi/ic_launcher.png"/>
+    </incident>
+
+    <incident
+        id="IconDuplicates"
+        severity="warning"
+        message="The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-xhdpi/ic_launcher_round.png"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-xhdpi/ic_launcher.png"/>
+    </incident>
+
+    <incident
+        id="IconDuplicates"
+        severity="warning"
+        message="The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-hdpi/ic_launcher_round.png"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-hdpi/ic_launcher.png"/>
+    </incident>
+
+    <incident
+        id="IconDuplicates"
+        severity="warning"
+        message="The following unrelated icon files have identical contents: ic_launcher.png, ic_launcher_round.png">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-mdpi/ic_launcher_round.png"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/mipmap-mdpi/ic_launcher.png"/>
+    </incident>
+
+</incidents>

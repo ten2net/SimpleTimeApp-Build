@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.1.0" type="partial_results">
+    <map id="UnsafeIntentLaunch">
+            <map id="unprotected">
+                <entry
+                    name="com.example.simpletimeapp.MainActivity"
+                    boolean="true"/>
+            </map>
+    </map>
+    <map id="UnusedResources">
+        <location id="R.string.accessibility_service_label"
+            file="${:app*debug*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="5"
+            column="13"
+            startOffset="200"
+            endLine="5"
+            endColumn="47"
+            endOffset="234"/>
+        <entry
+            name="model"
+            string="drawable[bg_function_button(U),ic_brightness_low(U),bg_time_card(U),ic_data(U),ic_gps(U),ic_wifi(U),ic_brightness_high(U),bg_brightness_button(U),bg_shutdown_button(U),ic_brightness_medium(U),ic_brightness_auto(U),ic_power(U)],id[shutdownButton(U),gpsButton(U),timeTextView(U),wifiButton(U),brightnessButton(U),dataButton(U)],layout[activity_main(U)],mipmap[ic_launcher_round(U),ic_launcher(U)],string[accessibility_service_label(D),app_name(U),accessibility_service_description(U)],style[Theme_AppCompat_Light_DarkActionBar(R)],xml[accessibility_service_config(U)];12^2^0^5^3^4^7^9^8^b,19^17;;;"/>
+    </map>
+
+</incidents>
