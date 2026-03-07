@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.content.pm.PackageManager
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -121,20 +122,27 @@ class MainActivity : AppCompatActivity() {
             
             if (autoBrightness == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
                 brightnessState = 3 // 自动模式
+                Log.d("Brightness", "检测到自动亮度模式")
                 return
             }
 
-            // 获取当前亮度值
+            // 获取当前亮度值 (0-255)
             val currentBrightness = Settings.System.getInt(contentResolver, 
                 Settings.System.SCREEN_BRIGHTNESS, 128)
             
+            Log.d("Brightness", "当前亮度值: $currentBrightness")
+            
             // 根据亮度值判断状态
+            // 0-60: 全暗, 61-180: 自定义, 181-255: 全亮
             brightnessState = when {
-                currentBrightness >= 200 -> 0 // 全亮
-                currentBrightness >= 80 -> 1  // 自定义
+                currentBrightness >= 180 -> 0 // 全亮
+                currentBrightness >= 60 -> 1  // 自定义
                 else -> 2 // 全暗
             }
+            
+            Log.d("Brightness", "亮度状态: ${brightnessStates[brightnessState].second}")
         } catch (e: Exception) {
+            Log.e("Brightness", "检测亮度失败: ${e.message}")
             brightnessState = 1 // 默认自定义
         }
     }
@@ -282,15 +290,23 @@ class MainActivity : AppCompatActivity() {
 
         // 方法2: 使用无障碍服务自动点击关机
         if (ShutdownAccessibilityService.isServiceEnabled()) {
-            // 无障碍服务已启用，通知服务准备自动点击关机
-            ShutdownAccessibilityService.isShutdownPending = true
-            // 尝试模拟电源键（需要Root）
-            try {
-                Runtime.getRuntime().exec("input keyevent 26")
-                return
-            } catch (e: Exception) {
-                // 失败了，显示引导
-            }
+            val serviceIntent = Intent(this, ShutdownAccessibilityService::class.java)
+            startService(serviceIntent)
+            
+            // 延迟后触发电源菜单
+            Handler(Looper.getMainLooper()).postDelayed({
+                val service = ShutdownAccessibilityService.instance
+                if (service != null) {
+                    val result = service.triggerShutdown()
+                    if (!result) {
+                        // 触发失败，显示手动指导
+                        showManualShutdownGuide()
+                    }
+                } else {
+                    showManualShutdownGuide()
+                }
+            }, 100)
+            return
         }
 
         // 方法3: 引导用户开启无障碍服务或手动关机
