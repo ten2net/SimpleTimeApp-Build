@@ -7,64 +7,54 @@
     android:padding="8dp"
     android:gravity="center">
 
-    <!-- WiFi按钮 -->
-    <ImageButton
-        android:id="@+id/widgetWifiButton"
+    <!-- WiFi按钮预览 -->
+    <ImageView
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:src="@drawable/ic_wifi"
         android:background="@drawable/bg_widget_button"
         android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="WiFi开关" />
+        android:contentDescription="WiFi" />
 
-    <!-- 移动数据按钮 -->
-    <ImageButton
-        android:id="@+id/widgetDataButton"
+    <!-- 移动数据按钮预览 -->
+    <ImageView
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:src="@drawable/ic_data"
         android:background="@drawable/bg_widget_button"
         android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="移动数据开关" />
+        android:contentDescription="数据" />
 
-    <!-- GPS按钮 -->
-    <ImageButton
-        android:id="@+id/widgetGpsButton"
+    <!-- GPS按钮预览 -->
+    <ImageView
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:src="@drawable/ic_gps"
         android:background="@drawable/bg_widget_button"
         android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="GPS开关" />
+        android:contentDescription="GPS" />
 
-    <!-- 亮度按钮 -->
-    <ImageButton
-        android:id="@+id/widgetBrightnessButton"
+    <!-- 亮度按钮预览 -->
+    <ImageView
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:src="@drawable/ic_brightness_medium"
         android:background="@drawable/bg_widget_button"
         android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="亮度调节" />
+        android:contentDescription="亮度" />
 
-    <!-- 关机按钮 -->
-    <ImageButton
-        android:id="@+id/widgetShutdownButton"
+    <!-- 关机按钮预览 -->
+    <ImageView
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:src="@drawable/ic_power"
         android:background="@drawable/bg_widget_button_shutdown"
         android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="一键关机" />
+        android:contentDescription="关机" />
 
 </LinearLayout>
