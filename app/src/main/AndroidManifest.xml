@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.simpletimeapp"
-    android:versionCode="10"
-    android:versionName="10.0">
+    android:versionCode="11"
+    android:versionName="11.0">
 
     <!-- WiFi权限 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -60,6 +60,24 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
         </service>
+
+        <!-- 桌面小部件 -->
+        <receiver
+            android:name=".ControlWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.simpletimeapp.WIDGET_WIFI" />
+                <action android:name="com.example.simpletimeapp.WIDGET_DATA" />
+                <action android:name="com.example.simpletimeapp.WIDGET_GPS" />
+                <action android:name="com.example.simpletimeapp.WIDGET_BRIGHTNESS" />
+                <action android:name="com.example.simpletimeapp.WIDGET_SHUTDOWN" />
+                <action android:name="com.example.simpletimeapp.UPDATE_WIDGET" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_control_info" />
+        </receiver>
     </application>
 
 </manifest>

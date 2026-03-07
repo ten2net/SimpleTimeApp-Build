@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_widget"
+    android:padding="8dp"
+    android:gravity="center">
+
+    <!-- WiFi按钮 -->
+    <ImageButton
+        android:id="@+id/widgetWifiButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_wifi"
+        android:background="@drawable/bg_widget_button"
+        android:contentDescription="WiFi开关" />
+
+    <!-- 移动数据按钮 -->
+    <ImageButton
+        android:id="@+id/widgetDataButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_data"
+        android:background="@drawable/bg_widget_button"
+        android:contentDescription="移动数据开关" />
+
+    <!-- GPS按钮 -->
+    <ImageButton
+        android:id="@+id/widgetGpsButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_gps"
+        android:background="@drawable/bg_widget_button"
+        android:contentDescription="GPS开关" />
+
+    <!-- 亮度按钮 -->
+    <ImageButton
+        android:id="@+id/widgetBrightnessButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_brightness_medium"
+        android:background="@drawable/bg_widget_button"
+        android:contentDescription="亮度调节" />
+
+    <!-- 关机按钮 -->
+    <ImageButton
+        android:id="@+id/widgetShutdownButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_power"
+        android:background="@drawable/bg_widget_button_shutdown"
+        android:contentDescription="一键关机" />
+
+</LinearLayout>
