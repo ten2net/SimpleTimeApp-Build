@@ -75,20 +75,14 @@ class MainActivity : AppCompatActivity() {
         wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager?
         telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
 
-        // 检测当前亮度状态（必须在检查权限前执行，以显示当前状态）
-        detectCurrentBrightnessState()
-        
-        // 立即更新亮度按钮显示
-        updateBrightnessButton()
+        // 设置按钮点击事件
+        setupButtons()
 
-        // 检查并申请亮度调节权限
+        // 检查亮度权限（会触发亮度检测）
         checkBrightnessPermission()
 
         // 启动时间更新
         startDynamicTimeUpdate()
-
-        // 设置按钮点击事件
-        setupButtons()
 
         // 初始化状态显示
         updateStatusIcons()
@@ -107,42 +101,56 @@ class MainActivity : AppCompatActivity() {
                         intent.data = Uri.parse("package:$packageName")
                         startActivityForResult(intent, REQUEST_WRITE_SETTINGS)
                     }
-                    .setNegativeButton("取消", null)
+                    .setNegativeButton("暂不设置") { _, _ ->
+                        // 用户选择暂不设置，仍然尝试读取亮度（某些设备可能允许读取）
+                        detectCurrentBrightnessState()
+                        updateBrightnessButton()
+                    }
                     .show()
+            } else {
+                // 已有权限，重新检测亮度确保准确
+                detectCurrentBrightnessState()
+                updateBrightnessButton()
             }
         }
     }
 
     private fun detectCurrentBrightnessState() {
         try {
-            // 检查是否为自动亮度
-            val autoBrightness = Settings.System.getInt(contentResolver, 
-                Settings.System.SCREEN_BRIGHTNESS_MODE, 
-                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL)
-            
-            if (autoBrightness == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                brightnessState = 3 // 自动模式
-                Log.d("Brightness", "检测到自动亮度模式")
-                return
-            }
+            // 首先检查是否为自动亮度模式
+            val autoBrightnessMode = Settings.System.getInt(
+                contentResolver,
+                Settings.System.SCREEN_BRIGHTNESS_MODE,
+                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
+            )
+
+            val isAutoMode = (autoBrightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC)
 
             // 获取当前亮度值 (0-255)
-            val currentBrightness = Settings.System.getInt(contentResolver, 
-                Settings.System.SCREEN_BRIGHTNESS, 128)
-            
-            Log.d("Brightness", "当前亮度值: $currentBrightness")
-            
-            // 根据亮度值判断状态
-            // 0-60: 全暗, 61-180: 自定义, 181-255: 全亮
+            val currentBrightness = Settings.System.getInt(
+                contentResolver,
+                Settings.System.SCREEN_BRIGHTNESS,
+                128
+            )
+
+            Log.d("Brightness", "检测到亮度值: $currentBrightness, 自动模式: $isAutoMode")
+
+            // 根据状态设置 brightnessState
             brightnessState = when {
-                currentBrightness >= 180 -> 0 // 全亮
-                currentBrightness >= 60 -> 1  // 自定义
-                else -> 2 // 全暗
+                isAutoMode -> 3 // 自动模式
+                currentBrightness >= 180 -> 0 // 全亮 (180-255)
+                currentBrightness >= 60 -> 1  // 自定义 (60-179)
+                else -> 2 // 全暗 (0-59)
             }
-            
-            Log.d("Brightness", "亮度状态: ${brightnessStates[brightnessState].second}")
+
+            Log.d("Brightness", "设置亮度状态索引: $brightnessState, 状态: ${brightnessStates[brightnessState].second}")
+
+        } catch (e: SecurityException) {
+            // 没有权限读取亮度，使用默认值
+            Log.e("Brightness", "读取亮度失败(无权限): ${e.message}")
+            brightnessState = 1 // 默认自定义
         } catch (e: Exception) {
-            Log.e("Brightness", "检测亮度失败: ${e.message}")
+            Log.e("Brightness", "读取亮度失败: ${e.message}")
             brightnessState = 1 // 默认自定义
         }
     }
@@ -406,13 +414,16 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == REQUEST_WRITE_SETTINGS) {
             // 用户从设置页面返回，重新检测亮度状态
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (Settings.System.canWrite(this)) {
-                    Toast.makeText(this, "权限已获取，可以调节亮度了", Toast.LENGTH_SHORT).show()
-                    detectCurrentBrightnessState()
-                    updateBrightnessButton()
+                val hasPermission = Settings.System.canWrite(this)
+                if (hasPermission) {
+                    Toast.makeText(this, "权限已获取，正在更新亮度状态...", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, "未获取权限，亮度调节功能受限", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "未获取权限，亮度检测可能不准确", Toast.LENGTH_SHORT).show()
                 }
+                // 无论是否获取权限，都重新检测亮度
+                detectCurrentBrightnessState()
+                updateBrightnessButton()
+                updateStatusIcons()
             }
         }
     }
@@ -420,10 +431,10 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         startDynamicTimeUpdate()
-        updateStatusIcons()
         // 重新检测亮度状态（可能用户在设置中修改了）
         detectCurrentBrightnessState()
         updateBrightnessButton()
+        updateStatusIcons()
     }
 
     override fun onPause() {
